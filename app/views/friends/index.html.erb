@@ -1,0 +1,54 @@
+
+
+<%
+=begin%>
+ <h1>Friends</h1>
+
+<div id="friends">
+  <% @friends.each do |friend| %>
+    <%= render friend %>
+    <p>
+      <%= link_to "Show this friend", friend %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New friend", new_friend_path %> 
+<%
+=end%>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Friends</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">first</th>
+      <th scope="col">last</th>
+      <th scope="col">mail</th>
+      <th scope="col">phone</th>
+      <th scope="col">twitter</th>
+      <th scope="col">User_id</th>
+      <th scope="col">buttons</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <% @friends.each do |friend| %>
+    
+      <tr>
+   <td> <%= friend.first_name%></td>
+   <td> <%= friend.last_name%></td>
+   <td> <%= friend.phone %></td>
+   <td> <%= friend.email %></td>
+   <td> <%= friend.twitter %></td>
+   <td> <%= friend.user_id %></td>
+   
+     <td> <%= link_to "Show this friend ", friend %><%= button_to "Destroy this friend", friend, method: :delete %></td>
+      </tr>
+
+  <% end %>
+
+  </tbody>
+</table>
