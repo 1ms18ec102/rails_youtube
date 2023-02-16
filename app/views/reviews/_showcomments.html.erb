@@ -1,4 +1,3 @@
-<p style="color: green"><%= notice %></p>
 
 <h1>Friends</h1>
 
@@ -7,31 +6,17 @@
     <tr>
       <th scope="col">comment</th>
       <th scope="col">Friend name</th>
-       <%
-=begin%>
- <th scope="col">buttons</th> 
-<%
-=end%>
-     
-      
+      <th scope="col">button</th> 
+
     </tr>
   </thead>
   <tbody>
-  
     <% @friend.reviews.all.each do |review| %>
-    
       <tr>
-   <td> <%= review.rtext %></td>
-  
-   <td> <%= @friend.first_name %></td>
-   <%
-=begin%>
- <td> <%= link_to "show comments", friend_review_path(@friend,review) %></td> 
-<%
-=end%>
-   
+          <td> <%= review.rtext %></td>
+          <td> <%= @friend.first_name %></td>
+          <td><%= button_to "Destroy this comment", [@friend , review], method: :delete %></td>  
 
-  <% end %>
-
+   <% end %>
   </tbody>
 </table>

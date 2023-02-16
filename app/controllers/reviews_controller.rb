@@ -11,14 +11,12 @@ class ReviewsController < ApplicationController
     
     def create
         @review=@friend.reviews.build(review_params)
-       
-        
         respond_to do |format|
             if @review.save
               format.turbo_stream do
                 render turbo_stream: [
                     turbo_stream.update("comment_form" ,partial: "reviews/form", locals: { review: @friend }),
-                    turbo_stream.append("comment_form" ,partial: "reviews/showcomments", locals: { friend: @review  })
+                    turbo_stream.update("comments_show" ,partial: "reviews/showcomments", locals: { friend: @review  })
                 ]
               end
               format.html { redirect_to friend_path(@friend), notice: "comment was successfully created." }
@@ -36,9 +34,43 @@ class ReviewsController < ApplicationController
     end
 
     def show
-
         @review = @friend.reviews.find(params[:id])
-        
+    end
+
+    def destroy
+        @review = @friend.reviews.find(params[:id])
+        respond_to do |format|
+            if @friend.user_id==current_user.id
+                if @review.destroy
+                    format.turbo_stream do
+                        render turbo_stream: [
+                           
+                            turbo_stream.update("comments_show" ,partial: "reviews/showcomments", locals: { friend: @review  })
+                        ]
+                    end
+                    format.html { redirect_to friend_path(@friend), notice: 'Comment was successfully destroyed.' }
+                    format.json { head :no_content }
+                    
+                else
+                    format.turbo_stream do
+                        render turbo_stream: [
+                            turbo_stream.update("comment_form" ,partial: "reviews/form", locals: { review: @review })
+                        ]
+                    end
+                    format.html { render :new, status: :unprocessable_entity }
+                    format.json { render json: @review.errors, status: :unprocessable_entity }
+                end
+            else
+                format.turbo_stream do
+                    render turbo_stream: [
+                        turbo_stream.update("comments_show" ,partial: "reviews/showcomments", locals: { review: @review } ,notice: 'you are not the right user to destory it.' )
+                    ]
+                end
+                format.html { redirect_to friend_path(@friend), notice: 'you are not the right user to destory it.' }
+                format.json { head :no_content }
+                
+            end
+        end
     end
 
     private

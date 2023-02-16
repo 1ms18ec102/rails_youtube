@@ -1,27 +1,23 @@
+
+<%= DateTime.now%>
 <p style="color: green"><%= notice %></p>
 
 <%= render @friend %>
+<% if user_signed_in?%>
 
+  <div>
+    <%= link_to "Edit this friend", edit_friend_path(@friend) %> |
+    <%= link_to "Back to friends", friends_path %>
+    <%= button_to "Destroy this friend", @friend, method: :delete %>
+  </div>
 
- 
-<%= link_to "show comments", friend_reviews_path(@friend) %>
-    <% if user_signed_in?%>
-   
-
-<div>
-  <%= link_to "Edit this friend", edit_friend_path(@friend) %> |
-  <%= link_to "Back to friends", friends_path %>
-  
-
-  <%= button_to "Destroy this friend", @friend, method: :delete %>
-</div>
+  <div id="comment_form">
+    <%= render partial: "reviews/form", locals: { review: @friend } %>
+  </div>
+  <div id="comments_show">
+    <%= render partial: "reviews/showcomments", locals: { friend: @friend } %>
+  </div>
 <% end %>
-
-<div id="comment_form">
-<%= render partial: "reviews/form", locals: { review: @friend } %>
-<%= render partial: "reviews/showcomments", locals: { friend: @friend } %>
-
-</div>
 
 
 

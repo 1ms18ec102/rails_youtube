@@ -1,3 +1,4 @@
 <h1>show</h1>
 <h4>Name of friend:<%= @friend.first_name %></h4>
 <h4>comment on friend:<%= @review.rtext %></h4>
+<%= button_to "Destroy this comment", [@friend , @review], method: :delete %>
