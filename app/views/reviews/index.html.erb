@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Friends</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">comment</th>
+      <th scope="col">Friend name</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  
+    <% @reviews.each do |review| %>
+    
+      <tr>
+   <td> <%= review.rtext %></td>
+  
+   <td> <%= @friend.first_name %></td>
+   
+
+  <% end %>
+
+  </tbody>
+</table>

@@ -2,9 +2,29 @@
 
 <%= render @friend %>
 
+
+ 
+<%= link_to "show comments", friend_reviews_path(@friend) %>
+    <% if user_signed_in?%>
+   
+
 <div>
   <%= link_to "Edit this friend", edit_friend_path(@friend) %> |
   <%= link_to "Back to friends", friends_path %>
+  
 
   <%= button_to "Destroy this friend", @friend, method: :delete %>
 </div>
+<% end %>
+
+<div id="comment_form">
+<%= render partial: "reviews/form", locals: { review: @friend } %>
+<%= render partial: "reviews/showcomments", locals: { friend: @friend } %>
+
+</div>
+
+
+
+
+
+

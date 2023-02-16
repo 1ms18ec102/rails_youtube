@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Friends</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">comment</th>
+      <th scope="col">Friend name</th>
+       <%
+=begin%>
+ <th scope="col">buttons</th> 
+<%
+=end%>
+     
+      
+    </tr>
+  </thead>
+  <tbody>
+  
+    <% @friend.reviews.all.each do |review| %>
+    
+      <tr>
+   <td> <%= review.rtext %></td>
+  
+   <td> <%= @friend.first_name %></td>
+   <%
+=begin%>
+ <td> <%= link_to "show comments", friend_review_path(@friend,review) %></td> 
+<%
+=end%>
+   
+
+  <% end %>
+
+  </tbody>
+</table>

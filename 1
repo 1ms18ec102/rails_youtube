@@ -1,0 +1,7 @@
+== 20230215064227 AddFriendIdToReviews: reverting =============================
+-- remove_index(:reviews, :friends_id)
+   -> 0.0067s
+-- remove_column(:reviews, :friends_id, :integer)
+   -> 0.0196s
+== 20230215064227 AddFriendIdToReviews: reverted (0.0663s) ====================
+

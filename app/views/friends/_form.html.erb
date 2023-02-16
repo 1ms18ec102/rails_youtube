@@ -36,10 +36,12 @@
     <%= form.text_field :twitter %>
   </div>
 
-  <div>
+
+ <div>
    
     <%= form.number_field :user_id ,value: current_user.id, user_id: :friend_user_id , type: :hidden %>
-  </div>
+  </div> 
+
 
   <div>
     <p class="notice"><%= notice %></p>

@@ -1,0 +1,13 @@
+<h4>add comment</h4>
+
+<%= form_for ([@friend,@friend.reviews.build ]) do |form| %>
+
+<div>
+    <%= form.label :Comment, style: "display: block" %>
+    <%= form.text_field :rtext %>
+  </div>
+  <div>
+    <p class="notice"><%= notice %></p>
+    <%= form.submit %>
+  </div>
+<% end %>
